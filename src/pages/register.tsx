@@ -1,7 +1,40 @@
+import { FormEvent, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import axios from "axios";
+import Input from "../components/Input";
+import { useRouter } from "next/router";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [agreement, setAgreement] = useState(false);
+  const [errors, setErrors] = useState<any>({});
+
+  const router = useRouter();
+
+  const submitForm = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!agreement) {
+      setErrors({ ...errors, agreement: "You must agree to the T&Cs." });
+      return;
+    }
+
+    try {
+      await axios.post("/auth/register", {
+        username,
+        email,
+        password,
+      });
+
+      router.push("/login");
+    } catch (error) {
+      setErrors({ ...error.response.data });
+    }
+  };
+
   return (
     <div className="flex">
       <Head>
@@ -11,49 +44,57 @@ const Register = () => {
       </Head>
 
       <div
-        className="w-40 h-screen bg-center bg-cover"
+        className="h-screen bg-center bg-cover w-36"
         style={{ backgroundImage: "url('/images/bgImg.jpg')" }}
       ></div>
       <div className="flex flex-col justify-center pl-6">
         <div className="w-72">
-          <h1 className="mb-2 text-lg">Sign Up</h1>
-          <p className="mb-10 text-xs">
+          <h1 className="mb-3 text-xl font-medium">Sign Up</h1>
+          <p className="mb-3 text-xs">
             By continuing, you agree to our User Agreement and Privacy Policy.
           </p>
-          <form>
+          <form onSubmit={submitForm}>
             <div className="mb-6">
               <input
                 type="checkbox"
                 className="mr-1 cursor-pointer"
                 id="agreement"
+                checked={agreement}
+                onChange={(e) => setAgreement(e.target.checked)}
               />
-              <label htmlFor="agreement" className="text-xs">
+              <label htmlFor="agreement" className="text-xs font-medium">
                 I agree to get email about cool stuff on ReadApp.
               </label>
+              <small className="block font-medium text-red-600">
+                {errors.agreement}
+              </small>
             </div>
-            <div className="mb-2">
-              <input
-                type="email"
-                className="w-full px-3 py-2 bg-gray-100 border border-gray-400 rounded"
-                placeholder="Email"
-              />
-            </div>
-            <div className="mb-2">
-              <input
-                type="text"
-                className="w-full px-3 py-2 bg-gray-100 border border-gray-400 rounded"
-                placeholder="Username"
-              />
-            </div>
-            <div className="mb-2">
-              <input
-                type="passwors"
-                className="w-full px-3 py-2 bg-gray-100 border border-gray-400 rounded"
-                placeholder="Password"
-              />
-            </div>
+            <Input
+              className="mb-2"
+              type="email"
+              value={email}
+              setValue={setEmail}
+              placeholder={"EMAIL"}
+              error={errors.email}
+            />
+            <Input
+              className="mb-2"
+              type="text"
+              value={username}
+              setValue={setUsername}
+              placeholder={"USERNAME"}
+              error={errors.username}
+            />
+            <Input
+              className="mb-2"
+              type="password"
+              value={password}
+              setValue={setPassword}
+              placeholder={"PASSWORD"}
+              error={errors.password}
+            />
             <button className="w-full py-2 mb-4 text-xs font-bold text-white uppercase bg-blue-500 border border-blue-500 rounded">
-              Sign Up
+              SIGN UP
             </button>
           </form>
           <small>
