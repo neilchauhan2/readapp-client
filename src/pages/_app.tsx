@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 
 import Navbar from "../components/Navbar";
 
+import "../styles/icon.css";
+
 axios.defaults.baseURL = "http://localhost:2000/api";
 axios.defaults.withCredentials = true;
 function MyApp({ Component, pageProps }: AppProps) {

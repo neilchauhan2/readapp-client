@@ -7,4 +7,6 @@ export interface Post {
   user: any;
   createdAt: string;
   updatedAt: string;
+  voteScore: number;
+  commentCount: number;
 }
