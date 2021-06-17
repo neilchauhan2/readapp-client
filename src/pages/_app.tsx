@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { AuthProvider } from "../context/auth";
 
 import Navbar from "../components/Navbar";
 
@@ -14,10 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const authRoutes = ["/login", "/register"];
   const hideNavbar = authRoutes.includes(pathname);
   return (
-    <>
+    <AuthProvider>
       {!hideNavbar && <Navbar />}
       <Component {...pageProps} />
-    </>
+    </AuthProvider>
   );
 }
 
