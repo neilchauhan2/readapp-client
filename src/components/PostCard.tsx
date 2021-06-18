@@ -19,7 +19,7 @@ const ActionButton = ({ children }) => {
 };
 
 const PostCard = ({ post }: PostCardProps) => {
-  const vote = async (value) => {
+  const vote = async (value: number) => {
     try {
       const res = await axios.post("/misc/vote", {
         identifier: post.identifier,
