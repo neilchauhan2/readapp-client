@@ -20,7 +20,6 @@ export default function Home() {
             <PostCard post={post} key={post.identifier} />
           ))}
         </div>
-        {/* Sidebar */}
       </div>
     </>
   );

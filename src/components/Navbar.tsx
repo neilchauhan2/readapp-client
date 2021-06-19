@@ -42,6 +42,13 @@ const Navbar: React.FC = () => {
       </div>
       {/* Auth buttons */}
       <div className="flex">
+        {!loading && authenticated && (
+          <Link href="/subs/create">
+            <a className="px-4 py-1 mr-2 text-sm font-semibold capitalize blue button">
+              Create Community
+            </a>
+          </Link>
+        )}
         {!loading &&
           (authenticated ? (
             <button
