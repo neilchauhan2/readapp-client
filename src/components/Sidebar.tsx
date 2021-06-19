@@ -3,8 +3,6 @@ import { useAuthState } from "../context/auth";
 import Link from "next/link";
 
 export default function Sidebar({ sub }) {
-  console.log(sub);
-
   const { authenticated } = useAuthState();
 
   return (
