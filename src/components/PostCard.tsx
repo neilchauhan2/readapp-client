@@ -27,6 +27,7 @@ const PostCard = ({ post }: PostCardProps) => {
         value,
       });
       console.log(res.data);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

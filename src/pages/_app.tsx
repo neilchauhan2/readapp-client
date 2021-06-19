@@ -18,7 +18,7 @@ const fetcher = async (url: string) => {
   }
 };
 
-axios.defaults.baseURL = "http://localhost:2000/api";
+axios.defaults.baseURL = "https://reaadapp.herokuapp.com/api";
 axios.defaults.withCredentials = true;
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();

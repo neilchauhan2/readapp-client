@@ -3,7 +3,7 @@ import { useAuthState, useAuthDispatch } from "../context/auth";
 import axios from "axios";
 
 const Navbar: React.FC = () => {
-  const { authenticated, loading } = useAuthState();
+  const { authenticated, loading, user } = useAuthState();
   const dispatch = useAuthDispatch();
 
   const logout = () => {
