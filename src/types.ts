@@ -9,6 +9,7 @@ export interface Post {
   updatedAt: string;
   voteScore: number;
   commentCount: number;
+  userVote: number;
 }
 
 export interface User {

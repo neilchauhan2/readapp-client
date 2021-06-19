@@ -74,6 +74,7 @@ export default function PostPage() {
       console.log(err);
     }
   };
+  console.log(post);
 
   return (
     <>
