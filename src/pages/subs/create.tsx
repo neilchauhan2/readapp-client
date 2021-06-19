@@ -103,15 +103,16 @@ export default function create() {
   );
 }
 
-export async function getServerSideProps({ req, res }) {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   try {
     const cookie = req.headers.cookie;
     if (!cookie) throw new Error("Missing auth token cookie");
 
-    const res = await axios.get("/auth/me", { headers: { cookie } });
-    const user = res.data.json();
-    return { props: { user } };
+    await axios.get("/auth/me", { headers: { cookie } });
+
+    return { props: {} };
   } catch (err) {
     res.writeHead(307, { Location: "/login" }).end();
+    return { props: {} };
   }
-}
+};
