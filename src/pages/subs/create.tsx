@@ -110,7 +110,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
     const res = await axios.get("/auth/me", { headers: { cookie } });
 
-    return res.data;
+    return { props: { user: res.data } };
   } catch (err) {
     res.writeHead(307, { Location: "/login" }).end();
   }
