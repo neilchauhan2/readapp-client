@@ -13,7 +13,7 @@ export default function submit() {
   const router = useRouter();
   const { sub: subName } = router.query;
 
-  const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null);
+  const { data, error } = useSWR(subName ? `/subs/${subName}` : null);
   if (error) router.push("/");
 
   const submitPost = async (event: FormEvent) => {
@@ -37,7 +37,7 @@ export default function submit() {
   return (
     <div className="container flex pt-5">
       <Head>
-        <title>Submit to Readit</title>
+        <title>Submit to ReadApp</title>
       </Head>
       <div className="w-160">
         <div className="p-4 bg-white rounded">
@@ -79,7 +79,7 @@ export default function submit() {
           </form>
         </div>
       </div>
-      {sub && <Sidebar sub={sub} />}
+      {data && data.sub && <Sidebar sub={data.sub} />}
     </div>
   );
 }

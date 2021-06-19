@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import PostCard from "../../components/PostCard";
+import Sidebar from "../../components/Sidebar";
 
 export default function Sub() {
   const router = useRouter();
@@ -55,6 +56,7 @@ export default function Sub() {
                   <PostCard key={post.identifier} post={post} />
                 ))}
             </div>
+            {data && data.sub && <Sidebar sub={data.sub} />}
           </div>
         </>
       )}
